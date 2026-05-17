@@ -1,0 +1,6 @@
+require("config.options")
+require("config.keymaps")
+require("config.completion")
+require("config.statusline")
+require("plugin")
+require("config.lsp")

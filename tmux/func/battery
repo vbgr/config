@@ -1,0 +1,22 @@
+bar=(▁ ▁ ▂ ▃ ▄ ▅ ▆ ▇ █ █ █)
+len=${#bar[*]}
+
+battery_bar() {
+    echo ${bar[$1]}
+}
+
+battery() {
+    status=$(pmset -g batt)
+    value=$(echo $status | grep -o "[0-9]\{1,3\}%" | grep -o "[0-9]\{1,3\}")
+    index=$(($value/$len))
+    item=${bar[$index]}
+    charg=$(echo $status | grep -o "AC Power")
+    if [[ $charg ]]; then
+        charging=↑
+    else
+        charging=↓
+    fi
+    echo $charging ${value}% $item
+}
+
+battery

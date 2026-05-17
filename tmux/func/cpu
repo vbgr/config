@@ -1,0 +1,7 @@
+count=2
+
+getcpu() {
+    printf "CPU: %05.2f%%" $(ps -A -o %cpu | awk '{s+=$1} END {print s}')
+}
+
+getcpu

@@ -1,0 +1,369 @@
+*me.txt* *me* Personal Neovim guide
+
+This is a short operational guide for this config.  The leader key is ",".
+
+==============================================================================
+CONTENTS                                                        *me-contents*
+
+  1. Comments        |me-comments|
+  2. Treesitter      |me-treesitter|
+  3. LSP navigation  |me-lsp|
+  4. Formatting      |me-formatting|
+  5. My mappings     |me-mappings|
+  6. My commands     |me-commands|
+  7. Plugin commands |me-plugin-commands|
+
+==============================================================================
+COMMENTS                                                        *me-comments*
+
+Commenting uses Nvim's built-in |commenting| support.  No comment plugin is
+needed.
+
+Normal mode:
+
+  gcc       Toggle comment on the current line.
+  3gcc      Toggle comment on three lines from the cursor.
+  gc{motion} Toggle comment over a motion.
+
+Visual mode:
+
+  gc        Toggle comments on the selected lines.
+
+Useful examples:
+
+  gcap      Toggle comment on a paragraph.
+  gc}       Toggle comment to the next paragraph boundary.
+  gc%       Toggle comment over the matching bracket range.
+  gcG       Toggle comment from cursor to end of file.
+  Vjjgc     Select three lines and toggle comments.
+
+Comment blocks:
+
+  gcgc      Toggle the contiguous comment block around the cursor.
+  dgc       Delete the contiguous comment block around the cursor.
+
+Notes:
+
+- Comment markers come from 'commentstring'.
+- If a filetype comments incorrectly, check:
+>
+  :setlocal commentstring?
+<
+- With a Treesitter parser, Nvim can use context-aware commentstrings for
+  injected languages when the language queries provide them.
+
+==============================================================================
+TREESITTER                                                    *me-treesitter*
+
+Treesitter is configured through nvim-treesitter, but highlighting and folding
+use Nvim's native APIs.
+
+Parsers requested by this config:
+
+  lua, vim, vimdoc, markdown, markdown_inline, query, json, yaml, go, python,
+  typescript, javascript, html, css, rust, bash, dockerfile, terraform, sql
+
+Registered aliases:
+
+  sh  -> bash
+  tf  -> terraform
+
+Enabled filetypes:
+
+  lua, vim, help, markdown, json, yaml, go, python, typescript, javascript,
+  html, css, rust, sh, bash, dockerfile, terraform, tf, sql
+
+Behavior:
+
+- Treesitter starts on the filetypes above.
+- If it starts successfully, the window uses Treesitter folding:
+>
+  foldmethod=expr
+  foldexpr=v:lua.vim.treesitter.foldexpr()
+<
+
+Useful commands:
+
+  :Inspect          Inspect highlight groups and semantic tokens under cursor.
+  :InspectTree      Open the Treesitter tree inspector.
+  :EditQuery        Edit Treesitter queries.
+  :TSInstall        Install parser(s).
+  :TSUpdate         Update parser(s).
+  :TSUninstall      Remove parser(s).
+  :TSStatus         Show parser status.
+  :TSLog            Open Treesitter log.
+  :TSCacheClear     Clear Treesitter cache.
+
+==============================================================================
+LSP NAVIGATION                                                      *me-lsp*
+
+LSP servers are enabled with Nvim's native |vim.lsp| config loader.
+
+Configured LSP names:
+
+  clang, compose, docker, go, html, json, just, lua, python, rust, sql,
+  terraform, typescript, yaml
+
+Native LSP defaults:
+
+  K         Hover documentation.  Press K again to enter the hover window.
+  gra       Code action.
+  gri       Go to implementation.
+  grn       Rename symbol.
+  grr       References.
+  grt       Type definition.
+  gO        Document symbols.
+  <C-S>     Signature help in Insert mode.
+
+Telescope LSP mappings:
+
+  ,fa       Code action.
+  ,fd       Find definitions.
+  ,ft       Find type definitions.
+  ,fr       Find references.
+  ,fi       Find implementations.
+  ,fs       Find document symbols.
+  ,fS       Find workspace symbols.
+  ,eb       Find diagnostics in current buffer.
+  ,ew       Find workspace diagnostics.
+
+Completion:
+
+  <Tab>     Select next completion item when the popup menu is visible.
+  <S-Tab>   Select previous completion item when the popup menu is visible.
+  <CR>      Accept selected completion item; otherwise insert a newline.
+  <C-Space> Manually trigger LSP completion.
+
+==============================================================================
+FORMATTING                                                 *me-formatting*
+
+Formatting is handled by conform.nvim.  Formatting is manual only; there is no
+format-on-save autocmd.
+
+Main command:
+
+  :F        Format the current buffer.
+
+Behavior:
+
+- :F runs conform.nvim synchronously with a 3000 ms timeout.
+- Configured formatters are preferred.
+- LSP formatting is used as a fallback when no configured formatter is
+  available.
+- Formatter errors notify the user.
+
+Configured formatters:
+
+  lua                         stylua
+  python                      ruff_format
+  go                          goimports, gofumpt
+  javascript, javascriptreact prettier
+  javascript.jsx              prettier
+  typescript, typescriptreact prettier
+  typescript.tsx              prettier
+  html, css                   prettier
+  json, jsonc                 prettier
+  markdown                    prettier
+  yaml                        yamlfmt
+  sh, bash                    shfmt
+  rust                        rustfmt, with LSP fallback
+  terraform, terraform-vars   terraform_fmt
+  tf                          terraform_fmt
+  sql                         sqruff
+
+Useful commands:
+
+  :ConformInfo        Show configured and available formatters plus log path.
+  :MasonInstallAll    Install formatter and LSP binaries configured here.
+
+==============================================================================
+MY MAPPINGS                                                   *me-mappings*
+
+General:
+
+  <Esc>     Clear search highlight.
+  q         In Visual mode, leave Visual mode.
+  ,x        Trim trailing whitespace in the current buffer.
+
+Clipboard:
+
+  y         In Visual mode, yank and copy to the macOS clipboard.
+  d         In Visual mode, delete and copy to the macOS clipboard.
+  x         In Visual mode, cut and copy to the macOS clipboard.
+
+Visual editing:
+
+  <         Outdent selection and keep it selected.
+  >         Indent selection and keep it selected.
+  K         Move selected lines up.
+  J         Move selected lines down.
+
+Windows:
+
+  <C-h>     Move to left window.
+  <C-j>     Move to lower window.
+  <C-k>     Move to upper window.
+  <C-l>     Move to right window.
+  ∆         Decrease window height.
+  ˚         Increase window height.
+  ˙         Decrease window width.
+  ¬         Increase window width.
+
+Buffers:
+
+  ,w        Delete current buffer.
+  ,W        Force delete current buffer.
+  <Tab>     Next buffer.
+  <S-Tab>   Previous buffer.
+
+Sidebar:
+
+  ,l        Locate current file in sidebar files source.
+  ,b        Open sidebar buffers source.
+  ,d        Open sidebar tree source.
+
+Telescope:
+
+  ,ff       Find files.
+  ,fb       Find buffers.
+  ,fh       Find help.
+  fg        Live grep.
+  T         Grep word under cursor.
+  ,fj       Find jumplist.
+  ,gc       Find git commits.
+  ,gb       Find git commits.
+  ,gB       Find git branches.
+  ,gs       Find git status.
+  ,t        Find Treesitter symbols.
+
+Git hunks:
+
+  ]c        Next git hunk.
+  [c        Previous git hunk.
+  ,hs       Stage hunk, or selected hunk in Visual mode.
+  ,hr       Reset hunk, or selected hunk in Visual mode.
+  ,hS       Stage buffer.
+  ,hR       Reset buffer.
+  ,hp       Preview hunk.
+  ,hi       Preview hunk inline.
+  ,hb       Blame line.
+  ,hd       Diff this.
+  ,hD       Diff this against previous revision.
+  ,hq       Send hunks to quickfix.
+  ,tb       Toggle current line blame.
+  ,tw       Toggle word diff.
+  ih        Text object for git hunk in Operator-pending and Visual mode.
+
+Search:
+
+  n         Next match and update hlslens.
+  N         Previous match and update hlslens.
+  *         Search word under cursor and update hlslens.
+  #         Search word backward and update hlslens.
+  g*        Search partial word under cursor and update hlslens.
+  g#        Search partial word backward and update hlslens.
+
+Surround:
+
+  ys{motion}{char} Add surround around a motion.
+  yss{char}        Add surround around the current line.
+  ds{char}         Delete surround.
+  cs{old}{new}     Change surround.
+  S{char}          Add surround around the Visual selection.
+  f                Custom target for function-call surrounds.
+
+Autopairs:
+
+  <C-a>     Fast wrap from nvim-autopairs.
+
+==============================================================================
+MY COMMANDS                                                   *me-commands*
+
+Command-line abbreviations:
+
+  :Q        Expands to :qa
+  :W        Expands to :w
+  :Wq       Expands to :wq
+
+Custom commands:
+
+  :E {file}              Edit a file using fd-backed completion.
+  :F                     Format the current buffer with conform.nvim.
+  :MasonInstallAll       Install the configured Mason packages.
+  :MasonCheckExternal    Check external tools needed by Mason packages.
+
+Command-line completion:
+
+- Wildmenu uses popup/fuzzy completion.
+- :find uses fd-backed fuzzy matching through 'findfunc'.
+- :E uses fd-backed file completion.
+- Help command completion is available through the built-in help tags.
+
+==============================================================================
+PLUGIN COMMANDS                                         *me-plugin-commands*
+
+Common plugin commands:
+
+  :ConformInfo             Show conform.nvim formatter status and log path.
+  :Telescope [picker]       Run a Telescope picker.
+  :Gitsigns [subcommand]    Run a gitsigns action.
+  :Mason                    Open Mason UI.
+  :NvimSidebar [source]     Open sidebar source.
+  :NvimSidebarToggle        Toggle sidebar source.
+  :NvimSidebarLocate        Locate current file in sidebar source.
+  :NvimSidebarTree          Open sidebar tree.
+  :Bdelete [buffer]         Delete buffer without closing the window.
+  :Bwipeout [buffer]        Wipe buffer without closing the window.
+  :ScrollbarToggle          Toggle scrollbar.
+  :IBLToggle                Toggle indent guides.
+
+Detected non-builtin commands:
+
+  Bdelete
+  Bwipeout
+  ConformInfo
+  DoMatchParen
+  E
+  EditQuery
+  F
+  Gitsigns
+  IBLDisable
+  IBLDisableScope
+  IBLEnable
+  IBLEnableScope
+  IBLToggle
+  IBLToggleScope
+  Inspect
+  InspectTree
+  Man
+  Mason
+  MasonCheckExternal
+  MasonInstall
+  MasonInstallAll
+  MasonLog
+  MasonUninstall
+  MasonUninstallAll
+  MasonUpdate
+  NoMatchParen
+  NvimSidebar
+  NvimSidebarLocate
+  NvimSidebarRefresh
+  NvimSidebarToggle
+  NvimSidebarTree
+  NvimWebDeviconsHiTest
+  Open
+  PlenaryBustedDirectory
+  PlenaryBustedFile
+  ScrollbarHide
+  ScrollbarShow
+  ScrollbarToggle
+  TSCacheClear
+  TSInstall
+  TSLog
+  TSStatus
+  TSUninstall
+  TSUpdate
+  Telescope
+
+==============================================================================
+vim:tw=78:ts=8:noet:ft=help:norl:

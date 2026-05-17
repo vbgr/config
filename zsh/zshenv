@@ -1,0 +1,5 @@
+if [ -z $ENVSET ]; then
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:/opt/local/bin:/opt/local/sbin:$PATH
+export ENVSET=1
+fi
+. "$HOME/.cargo/env"

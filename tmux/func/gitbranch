@@ -1,0 +1,5 @@
+gitbranch() {
+    cd $1 ; git rev-parse --abbrev-ref HEAD | awk '{print (length($0) < 40) ? $0 : substr($0,0,40)"..."}' | xargs -I % echo  %
+}
+
+gitbranch $1

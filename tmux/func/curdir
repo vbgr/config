@@ -1,0 +1,5 @@
+curdir() {
+    tmux display-message -p "#{pane_current_path}" | sed "s#$HOME#~#g"
+}
+
+curdir

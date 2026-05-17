@@ -1,0 +1,16 @@
+vim.lsp.enable({
+  "clang",
+  "compose",
+  "docker",
+  "go",
+  "html",
+  "json",
+  "just",
+  "lua",
+  "python",
+  "rust",
+  "sql",
+  "terraform",
+  "typescript",
+  "yaml",
+})

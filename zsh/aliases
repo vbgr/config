@@ -1,0 +1,59 @@
+alias cl=clear
+alias sc=source
+alias rd=rmdir
+alias md='mkdir -p'
+alias ls='ls -G'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias rgrep='grep -nr'
+alias pygrep='grep --include="*.py"'
+alias pyrgrep='pygrep -nr'
+alias gogrep='grep --include="*.go"'
+alias gorgrep='gogrep -nr'
+alias cgrep='grep --include="*.c" --include="*.h"'
+alias crgrep='cgrep -nr'
+alias gut=git
+alias pt=pytest
+alias py=python
+alias d=docker
+alias dp='docker compose'
+alias k=kubectl
+alias ll='ls -lhG'
+alias la='ls -lahG'
+alias gs='git status'
+alias gd='git diff'
+alias gb='git branch'
+alias neo='neovide --frame buttonless'
+alias tf=terraform
+alias g=gcloud
+
+# -='cd -'
+# ...=../..
+# ....=../../..
+# .....=../../../..
+# ......=../../../../..
+# 1='cd -'
+# 2='cd -2'
+# 3='cd -3'
+# 4='cd -4'
+# 5='cd -5'
+# 6='cd -6'
+# 7='cd -7'
+# 8='cd -8'
+# 9='cd -9'
+# _=sudo
+# afind='ack -il'
+# d='dirs -v | head -10'
+# globurl='noglob urlglobber '
+# grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+# history=omz_history
+# l='ls -lah'
+# la='ls -lAh'
+# ll='ls -lh'
+# ls='ls -G'
+# lsa='ls -lah'
+# md='mkdir -p'
+# pip='noglob pip'
+# please=sudo
+# rd=rmdir
+# run-help=man
+# which-command=whence

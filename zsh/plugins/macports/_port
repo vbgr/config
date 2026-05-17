@@ -1,0 +1,111 @@
+#compdef port
+
+local subcmds
+
+# we cache the list of ports
+# we shall use some cache policy to avoid problems with new ports
+if (( ! $+portlist )); then
+	portlist=($(port echo all; echo "all current active inactive installed uninstalled outdated"))
+fi
+
+subcmds=(
+'activate:Activate the given ports'
+'archive:Archive the given ports, i.e. install the port image but do not activate'
+'archivefetch:Fetch archive for the given ports'
+'build:Build the given ports'
+'cat:Writes the Portfiles of the given ports to stdout'
+'checksum:Compares the checksums for the downloaded files of the given ports'
+'clean:Removes files associated with the given ports'
+'configure:Configure the given ports'
+'contents:Returns a list of files installed by given ports'
+'deactivate:Deactivates the given ports'
+'dependents:Returns a list of installed dependents for each of the given ports'
+'deps:Display a dependency listing for the given ports'
+'destroot:Destroot the given ports'
+'dir:Returns the directories of the given ports'
+'distcheck:Checks if the given ports can be fetched from all of its master_sites'
+'distfiles:Returns a list of distfiles for the given port'
+'dmg:Creates a dmg for each of the given ports'
+'dpkg:Creates a dpkg for each of the given ports'
+'echo:Returns the list of ports the argument expands to'
+'edit:Edit given ports'
+'extract:Extract the downloaded files of the given ports'
+'fetch:Downloaded distfiles for the given ports'
+'file:Returns the path to the Portfile for each of the given ports'
+'gohome:Opens the homepages of the given ports in your browser'
+'help:Displays short help texts for the given actions'
+'info:Returns information about the given ports'
+'install:Installs the given ports'
+'installed:List installed versions of the given port, or all installed ports if no port is given'
+'lint:Checks if the Portfile is lint-free for each of the given ports'
+'list:List the available version for each of the given ports'
+'livecheck:Checks if a new version of the software is available'
+'location:Returns the install location for each of the given ports'
+'log:Shows main log for given ports'
+'logfile:Returns the log file path for each of the given ports'
+'mdmg:Creates a dmg containing an mpkg for each of the given ports and their dependencies'
+'mirror:Fetches distfiles for the given ports'
+'mpkg:Creates an mpkg for each of the given ports and their dependencies'
+'notes:Displays informational notes for each of the given ports'
+'outdated:Returns a list of outdated ports'
+'patch:Applies patches to each of the given ports'
+'pkg:Creates a pkg for each of the given ports'
+'platform:Returns the current platform that port is running on'
+'provides:Return which port provides each of the files given'
+'rdependents:Recursive version of dependents'
+'rdeps:Display a recursive dependency listing for the given ports'
+'rev:Scan for broken binaries in the installed ports and rebuild them as needed'
+'rpm:Creates a rpm for each of the given ports'
+'search:Search for a port'
+'select:Select between multiple versions of a versioned port'
+'selfupdate:Upgrade MacPorts itself and run the sync target'
+'setrequested:Marks each of the given ports as requested'
+'space:Show the disk space used by the given ports'
+'srpm:Creates a srpm for each of the given ports'
+'sync:Synchronize the set of Portfiles'
+'test:Run tests on each of the given ports'
+'unarchive:Unarchive the destroot of the given ports from installed images'
+'uninstall:Uninstall the given ports'
+'unsetrequested:Marks each of the given ports as unrequested'
+'upgrade:Upgrades the given ports to the latest version'
+'url:Returns the URL for each of the given ports'
+'usage:Returns basic usage of the port command'
+'variants:Returns a list of variants provided by the given ports, with descriptions if present'
+'version:Returns the version of MacPorts'
+'work:Returns the path to the work directory for each of the given ports'
+)
+
+_arguments -C \
+'-v[verbose mode (generate verbose messages)]' \
+'-d[debug mode (generate debugging messages)]' \
+'-q[quiet mode (suppress messages)]' \
+'-D[specify portdir]' \
+'-k[keep mode (do not autoclean after install)]' \
+'-n[dont follow dependencies in upgrade (only for upgrading)]' \
+'-a[upgrade all installed ports (only for upgrading)]' \
+'-u[uninstall non-active ports when upgrading and uninstalling]' \
+'-f[force mode (ignore state file)]' \
+'-s[source-only mode]' \
+'-b[binary-only mode]' \
+'-o[honor state files older than Portfile]' \
+'*::command:->command' \
+&& return 0
+
+case $state in
+	command)
+	if ((CURRENT == 1)); then
+		state=subcommands
+	else
+		state=portname
+	fi
+	;;
+esac
+
+case $state in
+	subcommands)
+	_describe -t commands 'port commands' subcmds
+	;;
+	portname)
+	_describe -t commands 'available ports' portlist
+	;;
+esac

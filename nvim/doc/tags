@@ -1,0 +1,10 @@
+me	me.txt	/*me*
+me-commands	me.txt	/*me-commands*
+me-comments	me.txt	/*me-comments*
+me-contents	me.txt	/*me-contents*
+me-formatting	me.txt	/*me-formatting*
+me-lsp	me.txt	/*me-lsp*
+me-mappings	me.txt	/*me-mappings*
+me-plugin-commands	me.txt	/*me-plugin-commands*
+me-treesitter	me.txt	/*me-treesitter*
+me.txt	me.txt	/*me.txt*
