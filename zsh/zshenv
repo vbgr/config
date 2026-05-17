@@ -1,5 +1,6 @@
 if [ -z $ENVSET ]; then
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export ENVSET=1
+  export PATH=$HOME/.cargo/bin:$HOME/go/bin:/opt/local/bin:/opt/local/sbin:$PATH
+  export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/3.14/bin:$PATH
+  export ENVSET=1
+  . "$HOME/.cargo/env"
 fi
-. "$HOME/.cargo/env"
