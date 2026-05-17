@@ -111,15 +111,3 @@ sh defaults.sh
 Some settings may require restarting affected applications or logging out and
 back in.
 
-## Ignored Files
-
-Generated and local-only files are intentionally ignored and should not be
-committed. Examples:
-
-- `.DS_Store`
-- `*.zwc`
-- `btop/`
-- `htop/`
-- `cagent/`
-- `init.nvim/`
-
