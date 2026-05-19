@@ -21,6 +21,7 @@ devicons.setup({
     ["pyo"] = { icon = "", color = "#519aba", cterm_color = "67", name = "Pyo" },
     ["rst"] = { icon = "", color = "#519aba", name = "rst"},
     ["justfile"] = { icon = "", color = "#83c092", name = "Justfile" },
+    ["just"] = { icon = "", color = "#83c092", name = "Justfile" },
     ["sh"] = { icon = "", color = "#83c092", name = "shell" },
     ["zsh"] = { icon = "", color = "#83c092", name = "zsh" },
     ["docker-compose.yml"] = { icon = "", color = "#458ee6", cterm_color = "68", name = "Dockerfile" },
@@ -30,6 +31,8 @@ devicons.setup({
     ["tf"] = { icon = "", color = "#df69ba", name = "terraform" },
     ["tfvars"] = { icon = "", color = "#df69ba", name = "tfvars" },
     ["toml"] = { icon = "", color = "#83c092", name = "toml" },
+    ["yaml"] = { icon = "", color = "#6d8086", name = "yaml" },
+    ["yml"] = { icon = "", color = "#6d8086", name = "yaml" },
   },
 })
 
