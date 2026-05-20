@@ -27,6 +27,7 @@ local parsers = {
   "go",
   "python",
   "typescript",
+  "tsx",
   "javascript",
   "html",
   "css",
@@ -39,6 +40,7 @@ local parsers = {
 
 vim.treesitter.language.register("bash", "sh")
 vim.treesitter.language.register("terraform", "tf")
+vim.treesitter.language.register("tsx", "typescriptreact")
 
 if treesitter.install and vim.fn.executable("tree-sitter") == 1 then
   treesitter.install(parsers)
@@ -54,6 +56,7 @@ local filetypes = {
   "go",
   "python",
   "typescript",
+  "typescriptreact",
   "javascript",
   "html",
   "css",

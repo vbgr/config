@@ -287,7 +287,7 @@ vim.api.nvim_create_autocmd({ "CmdlineEnter", "DirChanged" }, {
 
 vim.api.nvim_create_autocmd("CmdlineChanged", {
   group = completion_group,
-  pattern = "[:/\\?]",
+  pattern = ":",
   callback = function()
     vim.fn.wildtrigger()
   end,

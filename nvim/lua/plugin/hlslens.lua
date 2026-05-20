@@ -42,3 +42,5 @@ vim.api.nvim_set_keymap(
   [[g#<Cmd>lua require('hlslens').start()<CR>]],
   { noremap = true, silent = true }
 )
+
+require("hlslens").setup()

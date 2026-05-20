@@ -61,17 +61,19 @@ use Nvim's native APIs.
 Parsers requested by this config:
 
   lua, vim, vimdoc, markdown, markdown_inline, query, json, yaml, go, python,
-  typescript, javascript, html, css, rust, bash, dockerfile, terraform, sql
+  typescript, tsx, javascript, html, css, rust, bash, dockerfile, terraform,
+  sql
 
 Registered aliases:
 
-  sh  -> bash
-  tf  -> terraform
+  sh               -> bash
+  tf               -> terraform
+  typescriptreact  -> tsx
 
 Enabled filetypes:
 
   lua, vim, help, markdown, json, yaml, go, python, typescript, javascript,
-  html, css, rust, sh, bash, dockerfile, terraform, tf, sql
+  typescriptreact, html, css, rust, sh, bash, dockerfile, terraform, tf, sql
 
 Behavior:
 
